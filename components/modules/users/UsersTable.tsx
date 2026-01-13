@@ -8,9 +8,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
 import { UserType } from "@/types/user.type";
+import Link from "next/link";
 
 interface UsersTableProps {
     users: UserType[]
@@ -18,7 +18,7 @@ interface UsersTableProps {
 
 export const UsersTable = ({ users }: UsersTableProps) => {
 
-    
+
     return (
         <div className="w-full overflow-x-auto">
             <Table className="">
@@ -39,9 +39,12 @@ export const UsersTable = ({ users }: UsersTableProps) => {
                                 {users.email}
                             </TableCell>
                             <TableCell className="flex gap-2">
-                                <Button size="icon" variant="ghost">
+                                <Link
+                                    href={`/users/${users.id}`}
+                                    className="p-2 rounded-md hover:bg-slate-300 transition"
+                                >
                                     <BookOpen className="w-4 h-4" />
-                                </Button>
+                                </Link>
                             </TableCell>
                         </TableRow>
                     ))}
