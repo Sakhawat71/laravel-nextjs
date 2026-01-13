@@ -22,13 +22,16 @@ export const Navbar = () => {
                     </Link>
 
 
-                    <Button
-                        // onClick={() => signIn()}
-                        variant="outline"
+                    <Link href={'/login'}
                         className="flex items-center"
                     >
-                        <LogInIcon /> Login
-                    </Button>
+                        <Button
+                            variant="outline"
+                            className="flex items-center"
+                        >
+                            <LogInIcon /> Login
+                        </Button>
+                    </Link>
 
                 </nav>
             </div>
