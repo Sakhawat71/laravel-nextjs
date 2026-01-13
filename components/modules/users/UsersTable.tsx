@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import { BookOpen, PencilIcon, TrashIcon, View } from "lucide-react";
 
 export interface UserType {
     id: string
@@ -31,24 +31,23 @@ export const UsersTable = ({
             <Table className="">
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Tech Stack</TableHead>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Email</TableHead>
                         <TableHead>Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {users?.map((users) => (
                         <TableRow key={users.id}>
+                            <TableCell className="font-medium">{users.id}</TableCell>
                             <TableCell className="font-medium">{users.name}</TableCell>
                             <TableCell className="space-x-1">
                                 {users.email}
                             </TableCell>
                             <TableCell className="flex gap-2">
                                 <Button size="icon" variant="ghost">
-                                    <PencilIcon className="w-4 h-4" />
-                                </Button>
-                                <Button size="icon" variant="ghost">
-                                    <TrashIcon className="w-4 h-4 text-red-500" />
+                                    <BookOpen className="w-4 h-4" />
                                 </Button>
                             </TableCell>
                         </TableRow>
