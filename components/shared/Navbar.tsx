@@ -15,7 +15,7 @@ export const Navbar = () => {
                 </Link>
 
                 <nav className="flex gap-2">
-                    <Link href="/">
+                    <Link href="/users">
                         <Button variant="outline">
                             <User />
                         </Button>
