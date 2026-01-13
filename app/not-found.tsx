@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HomeIcon } from "lucide-react";
 
-export default function NotFoundPage() {
+export default function NotFound() {
     return (
         <section className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
             <div className="text-center max-w-md">
