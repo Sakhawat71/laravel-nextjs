@@ -9,23 +9,16 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { BookOpen, PencilIcon, TrashIcon, View } from "lucide-react";
-
-export interface UserType {
-    id: string
-    name : string
-    email:string
-    created_at: string
-    updated_at: string
-};
+import { BookOpen } from "lucide-react";
+import { UserType } from "@/types/user.type";
 
 interface UsersTableProps {
     users: UserType[]
 }
 
-export const UsersTable = ({
-    users,
-}: UsersTableProps) => {
+export const UsersTable = ({ users }: UsersTableProps) => {
+
+    
     return (
         <div className="w-full overflow-x-auto">
             <Table className="">
