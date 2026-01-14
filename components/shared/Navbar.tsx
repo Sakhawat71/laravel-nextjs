@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../ui/button";
-import { HomeIcon, LogInIcon, User, } from "lucide-react";
+import { LogInIcon, User, } from "lucide-react";
 import Link from "next/link";
 
 
