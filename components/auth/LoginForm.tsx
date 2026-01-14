@@ -20,8 +20,11 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
+import { LoginUser } from "@/services/auth";
+import { ILoginUser } from "@/types/auth.type";
+import toast from "react-hot-toast";
 
 export const LoginForm = ({
     className,
@@ -34,12 +37,16 @@ export const LoginForm = ({
         formState: { isSubmitting },
     } = form;
 
-    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        try {
-            console.log("Login data:", data);
-
-        } catch (err: any) {
-            console.error(err);
+    const onSubmit: SubmitHandler<ILoginUser> = async (data) => {
+        // console.log("Login data:", data);
+        const res = await LoginUser(data);
+        // console.log(res);
+        const toastId = toast.loading('Loading...');
+        if (res?.success) {
+            toast.success(res.message || "Login successful!", { id: toastId });
+            // router.push('/dashboard')
+        } else {
+            toast.error(res?.message || "Login failed!", { id: toastId });
         }
     };
 
