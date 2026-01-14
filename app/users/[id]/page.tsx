@@ -15,7 +15,7 @@ const UserDetailsPage = async ({ params }: UserDetailsPageProps) => {
     // console.log(data);
 
     return (
-        <div className="max-w-5xl mx-auto my-8 p-8 bg-slate-200 rounded-lg">
+        <div className="w-full md:w-1/4 mx-auto my-8 p-8 bg-slate-200 rounded-lg text-center">
             <UserCard user={data.data} />
         </div>
     );

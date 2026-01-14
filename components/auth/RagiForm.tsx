@@ -23,12 +23,13 @@ import {
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
 
-export const LoginForm = ({
+export const RegisterForm = ({
     className,
     ...props
 }: React.ComponentPropsWithoutRef<"div">) => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const form = useForm({});
     const {
         formState: { isSubmitting },
@@ -36,7 +37,16 @@ export const LoginForm = ({
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
-            console.log("Login data:", data);
+            console.log("Register data:", data);
+
+            // Check if passwords match
+            if (data.password !== data.password_confirmation) {
+                console.error("Passwords don't match");
+                return;
+            }
+
+            // TODO: Call your register API
+            // const response = await register(data.name, data.email, data.password, data.password_confirmation);
 
         } catch (err: any) {
             console.error(err);
@@ -47,15 +57,36 @@ export const LoginForm = ({
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-3xl text-center">Login</CardTitle>
+                    <CardTitle className="text-3xl text-center">Register</CardTitle>
                     <CardDescription className="text-center">
-                        Enter your email below to login to your account
+                        Create a new account to get started
                     </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
+                            {/* Name */}
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label htmlFor="name">Full Name</Label>
+                                        <FormControl>
+                                            <Input
+                                                id="name"
+                                                type="text"
+                                                placeholder="John Doe"
+                                                {...field}
+                                                required
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
                             {/* Email */}
                             <FormField
                                 control={form.control}
@@ -83,9 +114,7 @@ export const LoginForm = ({
                                 name="password"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <div className="flex items-center">
-                                            <Label htmlFor="password">Password</Label>
-                                        </div>
+                                        <Label htmlFor="password">Password</Label>
                                         <div className="relative">
                                             <FormControl>
                                                 <Input
@@ -109,16 +138,46 @@ export const LoginForm = ({
                                 )}
                             />
 
+                            {/* Confirm Password */}
+                            <FormField
+                                control={form.control}
+                                name="password_confirmation"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label htmlFor="password_confirmation">Confirm Password</Label>
+                                        <div className="relative">
+                                            <FormControl>
+                                                <Input
+                                                    id="password_confirmation"
+                                                    placeholder="Confirm Password"
+                                                    type={showConfirmPassword ? "text" : "password"}
+                                                    {...field}
+                                                    required
+                                                />
+                                            </FormControl>
+                                            <button
+                                                type="button"
+                                                className="absolute right-3 top-2 text-gray-500"
+                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            >
+                                                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                            </button>
+                                        </div>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
                             {/* Submit Button */}
                             <Button type="submit" className="w-full" disabled={isSubmitting}>
-                                {isSubmitting ? "Logging in..." : "Login"}
+                                {isSubmitting ? "Creating account..." : "Register"}
                             </Button>
 
-                            {/* Link to Register */}
+                            {/* Link to Login */}
                             <div className="text-center text-sm">
-                                Don`t have an account?{" "}
-                                <Link href="/register" className="underline underline-offset-4 hover:text-primary">
-                                    Register
+                                Already have an account?{" "}
+                                <Link href="/login" className="underline underline-offset-4 hover:text-primary">
+                                    Login
                                 </Link>
                             </div>
                         </form>
