@@ -29,7 +29,7 @@ export const RegisterForm = ({
 }: React.ComponentPropsWithoutRef<"div">) => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const form = useForm({});
     const {
         formState: { isSubmitting },
@@ -48,7 +48,7 @@ export const RegisterForm = ({
             // TODO: Call your register API
             // const response = await register(data.name, data.email, data.password, data.password_confirmation);
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error(err);
         }
     };
@@ -139,7 +139,7 @@ export const RegisterForm = ({
                             />
 
                             {/* Confirm Password */}
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
                                 name="password_confirmation"
                                 render={({ field }) => (
@@ -166,7 +166,7 @@ export const RegisterForm = ({
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
+                            /> */}
 
                             {/* Submit Button */}
                             <Button type="submit" className="w-full" disabled={isSubmitting}>
