@@ -20,36 +20,31 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
+import { registerUser } from "@/services/auth";
+import { IRegiUser } from "@/types/auth.type";
+import toast from "react-hot-toast";
 
 export const RegisterForm = ({
     className,
     ...props
 }: React.ComponentPropsWithoutRef<"div">) => {
-
     const [showPassword, setShowPassword] = useState(false);
-    // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const form = useForm({});
+    const form = useForm<IRegiUser>({});
     const {
         formState: { isSubmitting },
     } = form;
 
-    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        try {
-            console.log("Register data:", data);
+    const onSubmit: SubmitHandler<IRegiUser> = async (data) => {
+        const res = await registerUser(data);
+        console.log(res);
 
-            // Check if passwords match
-            if (data.password !== data.password_confirmation) {
-                console.error("Passwords don't match");
-                return;
-            }
-
-            // TODO: Call your register API
-            // const response = await register(data.name, data.email, data.password, data.password_confirmation);
-
-        } catch (err: unknown) {
-            console.error(err);
+        const toastId = toast.loading('Loading...');
+        if(res?.success){
+            toast.success(res.message || "Registration successful!",{id:toastId});
+        }else{
+            toast.error(res?.message || "Registration failed!",{id:toastId});
         }
     };
 
