@@ -42,7 +42,7 @@ export const RegisterForm = ({
 
         const toastId = toast.loading('Loading...');
         if(res?.success){
-            toast.success(res.message || "Registration successful!",{id:toastId});
+            toast.success(res.message || "Registration successful!",{id:toastId,duration:2000});
         }else{
             toast.error(res?.message || "Registration failed!",{id:toastId});
         }

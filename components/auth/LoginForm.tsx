@@ -32,7 +32,7 @@ export const LoginForm = ({
 }: React.ComponentPropsWithoutRef<"div">) => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const form = useForm({});
+    const form = useForm<ILoginUser>({});
     const {
         formState: { isSubmitting },
     } = form;
